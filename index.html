@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swirl House 🌀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink-bg:    #FFF0F5;
+      --pink-light: #FFD6E0;
+      --pink-mid:   #FFB6C1;
+      --pink-btn:   #FF8FA3;
+      --pink-dark:  #FF6F91;
+      --pink-deep:  #D6336C;
+      --white:      #FFFFFF;
+      --ink:        #2D1B2E;
+      --ink-soft:   #7B5C6E;
+      --radius:     18px;
+      --radius-lg:  28px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--pink-bg); color: var(--ink); overflow-x: hidden; }
+
+    nav { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 3px solid var(--pink-light); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 66px; box-shadow: 0 2px 16px #FF8FA322; }
+    .nav-logo { font-family: 'Fredoka One', cursive; font-size: 1.7rem; color: var(--pink-deep); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-weight: 700; font-size: 0.9rem; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--pink-deep); }
+    .nav-cta { background: var(--pink-deep); color: var(--white); border: none; border-radius: 50px; padding: 0.5rem 1.3rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+    .nav-cta:hover { background: var(--pink-dark); transform: scale(1.04); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    .notice { background: var(--pink-deep); color: var(--white); text-align: center; padding: 0.75rem 2rem; font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+
+    .hero { min-height: 78vh; background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-bg) 60%, #FFD6E0 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 5rem 2rem; position: relative; overflow: hidden; }
+    .hero-floats { position: absolute; inset: 0; pointer-events: none; }
+    .float { position: absolute; font-size: 2.2rem; animation: bob 4s ease-in-out infinite; opacity: 0.5; }
+    .float:nth-child(1) { top:10%; left:5%; animation-delay:0s; }
+    .float:nth-child(2) { top:15%; right:7%; animation-delay:0.7s; }
+    .float:nth-child(3) { bottom:20%; left:8%; animation-delay:1.3s; }
+    .float:nth-child(4) { bottom:15%; right:5%; animation-delay:0.4s; }
+    .float:nth-child(5) { top:50%; left:2%; animation-delay:1.9s; }
+    .float:nth-child(6) { top:40%; right:3%; animation-delay:2.4s; }
+    @keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-16px) rotate(4deg); } }
+    .hero-inner { position: relative; max-width: 680px; }
+    .hero-badge { display: inline-block; background: var(--pink-deep); color: var(--white); font-weight: 800; font-size: 0.8rem; border-radius: 50px; padding: 0.3rem 1rem; margin-bottom: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero h1 { font-family: 'Fredoka One', cursive; font-size: clamp(3.2rem, 9vw, 5.8rem); line-height: 1; color: var(--ink); margin-bottom: 0.3rem; }
+    .hero h1 em { color: var(--pink-deep); font-style: normal; }
+    .hero-motto { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--pink-dark); margin: 0.5rem 0 0.8rem; }
+    .hero-sub { font-size: 1rem; font-weight: 600; color: var(--ink-soft); max-width: 480px; margin: 0 auto 2rem; line-height: 1.6; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary { background: var(--pink-deep); color: var(--white); border: none; border-radius: 50px; padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px #D6336C33; transition: transform 0.15s, box-shadow 0.15s; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px #D6336C44; }
+    .btn-outline { background: var(--white); color: var(--pink-deep); border: 2.5px solid var(--pink-mid); border-radius: 50px; padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.2s; }
+    .btn-outline:hover { border-color: var(--pink-deep); transform: translateY(-3px); }
+
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: 0.78rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink-deep); margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Fredoka One', cursive; font-size: clamp(1.9rem, 4vw, 2.7rem); color: var(--ink); margin-bottom: 0.4rem; }
+    .section-sub { font-size: 0.97rem; color: var(--ink-soft); font-weight: 600; max-width: 560px; line-height: 1.6; margin-bottom: 3rem; }
+
+    .menu-section { background: var(--white); }
+    .menu-tabs { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .tab { background: var(--pink-bg); border: 2px solid var(--pink-light); border-radius: 50px; padding: 0.45rem 1.2rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem; cursor: pointer; transition: 0.2s; color: var(--ink-soft); }
+    .tab.active, .tab:hover { background: var(--pink-deep); border-color: var(--pink-deep); color: var(--white); }
+
+    .note-banner { background: linear-gradient(135deg, var(--pink-deep), var(--pink-dark)); border-radius: var(--radius-lg); padding: 1.1rem 1.6rem; margin-bottom: 2rem; color: var(--white); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-weight: 700; font-size: 0.92rem; }
+    .note-banner .icon { font-size: 1.6rem; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.4rem; }
+    .menu-card { background: var(--white); border-radius: var(--radius-lg); border: 2px solid var(--pink-light); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px #D6336C22; }
+    .menu-card-img { height: 200px; overflow: hidden; position: relative; background: var(--pink-bg); }
+    .menu-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+    .day-badge { position: absolute; top: 10px; right: 10px; background: var(--pink-deep); color: white; font-size: 0.65rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 50px; padding: 0.2rem 0.7rem; }
+    .menu-card-body { padding: 1.1rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .menu-card-tag { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink-deep); margin-bottom: 0.25rem; }
+    .menu-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.15rem; margin-bottom: 0.25rem; color: var(--ink); }
+    .menu-card p { font-size: 0.86rem; color: var(--ink-soft); font-weight: 600; flex: 1; line-height: 1.5; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.9rem; }
+    .price { font-family: 'Fredoka One', cursive; font-size: 1.25rem; color: var(--pink-deep); }
+    .add-btn { background: var(--pink-deep); color: var(--white); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .add-btn:hover { background: var(--pink-dark); transform: scale(1.12); }
+
+    .gallery-section { background: var(--pink-bg); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+    .gallery-card { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; position: relative; border: 3px solid var(--pink-light); cursor: pointer; }
+    .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .gallery-card:hover img { transform: scale(1.06); }
+    .gallery-card-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, #D6336Ccc); color: white; font-weight: 800; font-size: 0.85rem; padding: 1rem 1rem 0.7rem; text-align: center; }
+
+    .delivery-section { background: var(--white); }
+    .delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 600px) { .delivery-grid { grid-template-columns: 1fr; } }
+    .delivery-card { border-radius: var(--radius-lg); padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .delivery-card.light { background: var(--pink-bg); border: 2px solid var(--pink-light); }
+    .delivery-card.bold { background: linear-gradient(135deg, var(--pink-deep), var(--pink-dark)); color: white; }
+    .delivery-card.bold .delivery-sub { color: #ffe0ea; }
+    .delivery-icon { font-size: 2.5rem; }
+    .delivery-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.5rem; }
+    .delivery-sub { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); line-height: 1.55; }
+    .delivery-fee { font-family: 'Fredoka One', cursive; font-size: 1rem; background: var(--white); color: var(--pink-deep); border-radius: 50px; padding: 0.3rem 1rem; display: inline-block; align-self: flex-start; }
+
+    .contact-section { background: var(--pink-bg); }
+    .contact-wrap { text-align: center; }
+    .contact-wrap a.btn-primary { margin: 0.3rem; }
+
+    footer { background: var(--ink); color: #fff8; text-align: center; padding: 2rem; font-size: 0.85rem; font-weight: 700; }
+    footer strong { color: var(--pink-mid); }
+
+    #cart-btn { position: fixed; bottom: 24px; right: 24px; z-index: 300; background: #25D366; color: white; border: none; border-radius: 50%; width: 62px; height: 62px; font-size: 1.7rem; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 6px 20px #00000033; transition: transform 0.15s; }
+    #cart-badge { position: absolute; top: -4px; right: -4px; background: var(--pink-deep); color: white; font-size: 0.7rem; font-weight: 900; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+
+    #cart-modal { position: fixed; inset: 0; background: #00000066; z-index: 400; display: none; align-items: flex-end; justify-content: center; }
+    #cart-modal.open { display: flex; }
+    .cart-panel { background: white; border-radius: 24px 24px 0 0; width: 100%; max-width: 480px; max-height: 80vh; overflow-y: auto; padding: 1.5rem; }
+    .cart-panel h3 { font-family: 'Fredoka One', cursive; margin-bottom: 1rem; color: var(--pink-deep); }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--pink-light); gap: 0.5rem; }
+    .cart-item-name { font-weight: 700; flex: 1; font-size: 0.92rem; }
+    .cart-item-price { font-weight: 800; color: var(--pink-deep); }
+    .remove-btn { background: none; border: none; color: #999; font-size: 1.1rem; cursor: pointer; }
+    .empty-cart { text-align: center; padding: 2rem; color: var(--ink-soft); font-weight: 700; }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; margin: 1rem 0; font-family: 'Fredoka One', cursive; font-size: 1.3rem; }
+    .checkout-btn { width: 100%; background: #25D366; color: white; border: none; border-radius: 50px; padding: 1rem; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1rem; cursor: pointer; }
+    .close-cart { display: block; margin: 0 auto 0.5rem; background: none; border: none; font-size: 1rem; color: var(--ink-soft); cursor: pointer; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="nav-logo">🌀 Swirl House</a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#menu" class="nav-cta">Order Now</a>
+  </nav>
+
+  <div class="notice">🌀 Now taking orders — cinnamon rolls, tacos &amp; loaded nachos!</div>
+
+  <header class="hero">
+    <div class="hero-floats">
+      <span class="float">🌀</span><span class="float">🌮</span><span class="float">🧀</span>
+      <span class="float">🌀</span><span class="float">🌮</span><span class="float">🍫</span>
+    </div>
+    <div class="hero-inner">
+      <span class="hero-badge">Phalaborwa Town</span>
+      <h1>Swirl <em>House</em></h1>
+      <p class="hero-motto">Rolled with love, loaded with flavour</p>
+      <p class="hero-sub">Home-baked cinnamon rolls, crispy taco meals and loaded nachos made fresh to order in Phalaborwa Town.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-primary">See the Menu</a>
+        <a href="#delivery" class="btn-outline">Delivery Info</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-eyebrow">What's Cooking</div>
+      <h2 class="section-title">Our Menu</h2>
+      <p class="section-sub">Taco meals, loaded nachos, and our signature cinnamon rolls — single or by the box.</p>
+
+      <div class="note-banner">
+        <span class="icon">🍪</span>
+        <div>Heads up: our Oreo rolls are made without cinnamon in the dough — just Oreo through and through.</div>
+      </div>
+
+      <div class="note-banner" style="background: linear-gradient(135deg, var(--pink-mid), var(--pink-btn));">
+        <span class="icon">📅</span>
+        <div>🌮 Taco Meals: Tuesdays &amp; Thursdays &nbsp;•&nbsp; 🧀 Loaded Nachos: Wednesdays &nbsp;•&nbsp; 🌀 Cinnamon Rolls: available by demand, any day</div>
+      </div>
+
+      <div class="menu-tabs">
+        <button class="tab active" onclick="filterMenu('all',this)">All</button>
+        <button class="tab" onclick="filterMenu('tacoMeal',this)">🌮 Taco Meals</button>
+        <button class="tab" onclick="filterMenu('nachos',this)">🧀 Loaded Nachos</button>
+        <button class="tab" onclick="filterMenu('roll',this)">🌀 Single Rolls</button>
+        <button class="tab" onclick="filterMenu('box',this)">📦 Boxes</button>
+      </div>
+
+      <div class="menu-grid" id="menu-grid"></div>
+    </div>
+  </section>
+
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-eyebrow">Fresh &amp; Photographed</div>
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">A taste of what leaves the Swirl House kitchen.</p>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <section class="delivery-section" id="delivery">
+    <div class="container">
+      <div class="section-eyebrow">Getting It To You</div>
+      <h2 class="section-title">Delivery &amp; Pickup</h2>
+      <p class="section-sub">Order ahead and we'll have it ready — delivered or ready for collection.</p>
+      <div class="delivery-grid">
+        <div class="delivery-card light">
+          <div class="delivery-icon">🏍️</div>
+          <h3>Delivery</h3>
+          <p class="delivery-sub">Delivered fresh to your door within Phalaborwa Town.</p>
+          <span class="delivery-fee">R30 delivery fee</span>
+        </div>
+        <div class="delivery-card bold">
+          <div class="delivery-icon">🛍️</div>
+          <h3>Pickup</h3>
+          <p class="delivery-sub">Order via WhatsApp and collect at a time that suits you — no delivery fee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container contact-wrap">
+      <div class="section-eyebrow">Say Hello</div>
+      <h2 class="section-title">Order or Ask a Question</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">The fastest way to reach us is WhatsApp — tap below and we'll get right back to you.</p>
+      <a class="btn-primary" href="https://wa.me/27773971514" target="_blank">💬 Message us on WhatsApp</a>
+    </div>
+  </section>
+
+  <footer>
+    Made with 🌀 by <strong>Swirl House</strong> — Phalaborwa Town
+  </footer>
+
+  <button id="cart-btn" onclick="openCart()">
+    🛒<span id="cart-badge">0</span>
+  </button>
+
+  <div id="cart-modal">
+    <div class="cart-panel">
+      <button class="close-cart" onclick="closeCart()">✕ Close</button>
+      <h3>Your Order</h3>
+      <div id="cart-items-list"></div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-price">R0</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Order via WhatsApp</button>
+    </div>
+  </div>
+
+<script>
+const WHATSAPP_NUMBER = "27773971514";
+
+const items = [
+  { id:1,  name:"Beef Mince Taco Meal",       tag:"tacoMeal", day:"Tue & Thu", img:"images/taco-beef.jpg",             desc:"2 tacos, fries, salsa &amp; sweet chili. Seasoned beef mince, big bold flavour.",       price:140 },
+  { id:2,  name:"Chipotle Chicken Taco Meal", tag:"tacoMeal", day:"Tue & Thu", img:"images/taco-chipotle-chicken.jpg", desc:"2 tacos, fries, salsa &amp; sweet chili. Smoky chipotle chicken done right.",             price:140 },
+  { id:3,  name:"Boerewors Taco Meal",        tag:"tacoMeal", day:"Tue & Thu", img:"images/taco-boerewors.jpg",        desc:"2 tacos, fries, salsa &amp; sweet chili. A proudly local twist on taco night.",           price:150 },
+  { id:4,  name:"Pulled Pork Taco Meal",      tag:"tacoMeal", day:"Tue & Thu", img:"images/taco-pulled-pork.jpg",      desc:"2 tacos, fries, salsa &amp; sweet chili. Slow-cooked, saucy pulled pork.",                price:150 },
+
+  { id:5,  name:"Beef Mince Nachos",       tag:"nachos", day:"Wednesdays", img:"images/nachos-beef.jpg",             desc:"Crispy chips loaded with seasoned beef, melted cheese and all the toppings.", price:110 },
+  { id:6,  name:"Chipotle Chicken Nachos", tag:"nachos", day:"Wednesdays", img:"images/nachos-chipotle-chicken.jpg", desc:"Crispy chips loaded with smoky chipotle chicken and melted cheese.",          price:110 },
+  { id:7,  name:"Boerewors Nachos",        tag:"nachos", day:"Wednesdays", img:"images/nachos-boerewors.jpg",        desc:"Crispy chips loaded with boerewors, melted cheese and all the toppings.",     price:120 },
+  { id:8,  name:"Pulled Pork Nachos",      tag:"nachos", day:"Wednesdays", img:"images/nachos-pulled-pork.jpg",      desc:"Crispy chips loaded with saucy pulled pork and melted cheese.",               price:120 },
+
+  { id:9,  name:"Classic Cinnamon Roll", tag:"roll", day:"By demand", img:"images/roll-classic.jpg", desc:"Our signature freshly baked classic — soft, fluffy, and perfectly glazed.",       price:45 },
+  { id:10, name:"Oreo Cinnamon Roll",    tag:"roll", day:"By demand", img:"images/roll-oreo.jpg",    desc:"Crushed Oreo crumbles on top — no cinnamon in this one, Oreo through and through.", price:50 },
+  { id:11, name:"Nutella Cinnamon Roll", tag:"roll", day:"By demand", img:"images/roll-nutella.jpg", desc:"Rich Nutella swirled through every layer of our soft dough.",                     price:50 },
+
+  { id:12, name:"2 Pack — Classic",           tag:"box", day:"By demand", img:"images/roll-classic.jpg",     desc:"Two classic cinnamon rolls in one box.",                              price:85 },
+  { id:13, name:"2 Pack — Gourmet (Oreo)",    tag:"box", day:"By demand", img:"images/roll-oreo.jpg",         desc:"Two Oreo cinnamon rolls. Choose Oreo or Nutella when you order.",      price:95 },
+  { id:14, name:"2 Pack — Gourmet (Nutella)", tag:"box", day:"By demand", img:"images/roll-nutella.jpg",      desc:"Two Nutella cinnamon rolls. Choose Oreo or Nutella when you order.",   price:95 },
+  { id:15, name:"4 Pack — Classic",           tag:"box", day:"By demand", img:"images/box-4-classic.jpg",     desc:"Four classic cinnamon rolls in one box.",                             price:170 },
+  { id:16, name:"4 Pack — Gourmet (Oreo)",    tag:"box", day:"By demand", img:"images/box-4-oreo.jpg",        desc:"Four Oreo cinnamon rolls. Choose Oreo or Nutella when you order.",     price:190 },
+  { id:17, name:"4 Pack — Gourmet (Nutella)", tag:"box", day:"By demand", img:"images/box-4-nutella.jpg",     desc:"Four Nutella cinnamon rolls. Choose Oreo or Nutella when you order.",  price:190 },
+  { id:18, name:"6 Pack — Classic",           tag:"box", day:"By demand", img:"images/box-6-classic.jpg",     desc:"Six classic cinnamon rolls in one box.",                              price:260 },
+  { id:19, name:"6 Pack — Gourmet (Oreo)",    tag:"box", day:"By demand", img:"images/box-6-oreo.jpg",        desc:"Six Oreo cinnamon rolls. Choose Oreo or Nutella when you order.",      price:290 },
+  { id:20, name:"6 Pack — Gourmet (Nutella)", tag:"box", day:"By demand", img:"images/box-6-nutella.jpg",     desc:"Six Nutella cinnamon rolls. Choose Oreo or Nutella when you order.",   price:290 },
+  { id:21, name:"6 Pack — Assorted",          tag:"box", day:"By demand", img:"images/box-6-assorted.jpg",    desc:"2 Classic + 2 Oreo + 2 Nutella. Best value, best variety!",           price:280 },
+];
+
+let cart = [];
+
+function renderMenu(filter) {
+  const grid = document.getElementById('menu-grid');
+  const list = filter === 'all' ? items : items.filter(i => i.tag === filter);
+  const tagLabel = { tacoMeal:'🌮 Taco Meal', nachos:'🧀 Loaded Nachos', roll:'🌀 Cinnamon Roll', box:'📦 Box Deal' };
+  grid.innerHTML = list.map(item => `
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="${item.img}" alt="${item.name}" loading="lazy"/>
+        <span class="day-badge">${item.day}</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-tag">${tagLabel[item.tag]}</div>
+        <h3>${item.name}</h3>
+        <p>${item.desc}</p>
+        <div class="menu-card-footer">
+          <span class="price">R${item.price}</span>
+          <button class="add-btn" onclick="addToCart(${item.id})">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterMenu(filter, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu(filter);
+}
+
+function addToCart(id) {
+  cart.push({...items.find(i => i.id === id)});
+  updateCartBtn();
+  const btn = document.getElementById('cart-btn');
+  btn.style.transform = 'scale(1.15)';
+  setTimeout(() => btn.style.transform = '', 200);
+}
+
+function updateCartBtn() {
+  document.getElementById('cart-badge').textContent = cart.length;
+  document.getElementById('cart-btn').style.display = cart.length > 0 ? 'flex' : 'none';
+}
+
+function openCart() {
+  const list = document.getElementById('cart-items-list');
+  const total = document.getElementById('cart-total-price');
+  if (cart.length === 0) {
+    list.innerHTML = '<div class="empty-cart">🛒 Nothing yet — go pick something delicious!</div>';
+    total.textContent = 'R0';
+  } else {
+    list.innerHTML = cart.map((item,idx) => `
+      <div class="cart-item">
+        <span class="cart-item-name">${item.name}</span>
+        <span class="cart-item-price">R${item.price}</span>
+        <button class="remove-btn" onclick="removeFromCart(${idx})">✕</button>
+      </div>`).join('');
+    total.textContent = 'R' + cart.reduce((a,i) => a+i.price, 0);
+  }
+  document.getElementById('cart-modal').classList.add('open');
+}
+
+function closeCart() { document.getElementById('cart-modal').classList.remove('open'); }
+function removeFromCart(idx) { cart.splice(idx,1); updateCartBtn(); openCart(); }
+
+function checkout() {
+  const total = cart.reduce((a,i) => a+i.price, 0);
+  const lines = cart.map(i => `• ${i.name} — R${i.price}`).join('%0A');
+  const msg = `Hi Swirl House! 🌀%0A%0AI would like to place an order:%0A${lines}%0A%0ATotal: R${total}%0A%0APlease confirm delivery or pickup. Thank you!`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+  cart = []; updateCartBtn(); closeCart();
+}
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  const shots = [
+    { img:"images/box-6-assorted.jpg", label:"Assorted Box of 6" },
+    { img:"images/taco-boerewors.jpg", label:"Boerewors Taco Meal" },
+    { img:"images/nachos-chipotle-chicken.jpg", label:"Chipotle Chicken Nachos" },
+    { img:"images/roll-nutella.jpg", label:"Nutella Roll" },
+    { img:"images/nachos-pulled-pork.jpg", label:"Pulled Pork Nachos" },
+    { img:"images/box-4-oreo.jpg", label:"4 Pack Oreo" },
+    { img:"images/taco-chipotle-chicken.jpg", label:"Chipotle Chicken Taco Meal" },
+    { img:"images/roll-oreo.jpg", label:"Oreo Roll" },
+  ];
+  grid.innerHTML = shots.map(s => `
+    <div class="gallery-card">
+      <img src="${s.img}" alt="${s.label}" loading="lazy"/>
+      <div class="gallery-card-label">${s.label}</div>
+    </div>`).join('');
+}
+
+document.getElementById('cart-modal').addEventListener('click', function(e) { if(e.target===this) closeCart(); });
+renderMenu('all');
+renderGallery();
+</script>
+</body>
+</html>
